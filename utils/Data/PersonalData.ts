@@ -1,0 +1,32 @@
+export const personalData = {
+  name: "Aman Karn",
+  profile: "/profile.jpeg",
+  designation: "Full-Stack Web",
+  designationAlternateWords: [
+    "Full Stack Enthusiast.",
+    "Front-End Developer.",
+    "CS & Engineering Student.",
+    "Machine Learning Enthusiast.",
+    "Problem Solver.",
+    "Web Architect.",
+    "DSA Champion.",
+    "UX/UI Designer.",
+    "Tech Innovator.",
+  ],
+  description:
+    "I'm Aman Karn, a Computer Science student (Batch of 2024–2028) at Sri Eshwar College of Engineering, with a clear vision to become a proficient Full Stack Developer. My journey began with a curiosity for how websites are built, which quickly grew into a passion for crafting clean, functional, and aesthetically pleasing web interfaces. Passion flows through every line of code I write — brewing innovation one cup, one commit at a time.",
+  email: "officala93@gmail.com",
+  phone: "+917204840692",
+  address: "Coimbatore, India",
+  github: "https://github.com/Aman530680",
+  facebook: "",
+  Instagram: "",
+  linkedIn: "https://www.linkedin.com/in/aman-karn-569040345/",
+  twitter: "",
+  stackOverflow: "",
+  devUsername: "Aman Karn",
+  leetcode: "https://leetcode.com/u/Aman530680/",
+  skillrack:
+    "https://www.skillrack.com/faces/resume.xhtml?id=514866&key=b3e8bcdad8acd07fd018834ec6e97ccb9b3c236b",
+  resume: "/aman-karn-resume.pdf",
+};
