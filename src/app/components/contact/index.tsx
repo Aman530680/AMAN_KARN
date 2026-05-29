@@ -45,7 +45,8 @@ const ContactForm = () => {
     setIsLoading(true);
     setResult("");
     const formData = new FormData(e.currentTarget);
-    formData.append("access_key", process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "");
+    const key = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "d64ab352-b569-45f6-b097-2c96a1a8cfee";
+    formData.append("access_key", key);
     const response = await fetch("https://api.web3forms.com/submit", { method: "POST", body: formData });
     const data = await response.json();
     setIsLoading(false);
