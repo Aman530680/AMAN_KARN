@@ -5,11 +5,11 @@ export const projectsData = [
     description:
       "An AI-powered personalized diet planning and nutrition tracking platform that combines machine learning with Google Gemini to generate intelligent Indian meal recommendations and daily nutrition insights.",
     tools: ["Next.js", "React", "Node.js", "MongoDB", "Python", "Gemini API"],
-    role: "Full-stack Developer",
+    role: "Data Science",
     code: "https://github.com/Aman530680/NutriAI---Personalized-Diet-Recommendation-System.git",
     demo: "",
     date: "2026",
-    images: ["/placeholder/placeholder.png"],
+    images: ["/projects/nutriai/nutriai.png"],
     videos: [""],
     highlights: [
       "Personalized macro prediction using machine learning models.",
