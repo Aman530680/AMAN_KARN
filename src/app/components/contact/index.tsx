@@ -10,7 +10,7 @@ import { MapPin, Send, MessageSquare, User, Mail } from "lucide-react";
 import React, { useState } from "react";
 
 interface ContactLinkProps {
-  href: string;
+  href?: string;
   icon: React.ElementType;
   label: string;
   value: string;
@@ -18,20 +18,22 @@ interface ContactLinkProps {
 }
 
 const ContactInfoCard = ({ href, icon: Icon, label, value, color }: ContactLinkProps) => (
-  <Link
-    href={href}
-    target="_blank"
-    className="group relative flex items-center gap-4 p-4 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300 shadow-xl"
-  >
+  <div className="group relative flex items-center gap-4 p-4 rounded-2xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/10 transition-all duration-300 shadow-xl">
     <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300" style={{ backgroundColor: `${color}15` }}>
       <Icon className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" style={{ color: color }} />
     </div>
     <div className="flex flex-col">
       <span className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">{label}</span>
-      <span className="text-sm md:text-base text-slate-200 font-medium group-hover:text-white transition-colors">{value}</span>
+      {href ? (
+        <a href={href} className="text-sm md:text-base text-slate-200 font-medium group-hover:text-white transition-colors break-all">
+          {value}
+        </a>
+      ) : (
+        <span className="text-sm md:text-base text-slate-200 font-medium">{value}</span>
+      )}
     </div>
     <div className="absolute inset-0 opacity-0 group-hover:opacity-10 rounded-2xl transition-opacity duration-300 pointer-events-none blur-xl" style={{ backgroundColor: color }} />
-  </Link>
+  </div>
 );
 
 const ContactForm = () => {
@@ -44,20 +46,43 @@ const ContactForm = () => {
     e.preventDefault();
     setIsLoading(true);
     setResult("");
+    setIsSuccess(false);
+
     const formData = new FormData(e.currentTarget);
-    const key = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "d64ab352-b569-45f6-b097-2c96a1a8cfee";
-    formData.append("access_key", key);
-    const response = await fetch("https://api.web3forms.com/submit", { method: "POST", body: formData });
-    const data = await response.json();
-    setIsLoading(false);
-    if (data.success) {
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY?.trim();
+
+    if (!accessKey) {
+      setResult("The contact form is not configured yet. Please email me directly.");
+      setIsLoading(false);
+      return;
+    }
+
+    formData.set("name", input.name.trim());
+    formData.set("email", input.email.trim());
+    formData.set("message", input.message.trim());
+    formData.set("access_key", accessKey);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+      const data: { success?: boolean; message?: string } = await response.json();
+
+      if (!response.ok || !data.success) {
+        setResult(data.message || "Something went wrong. Please try again.");
+        return;
+      }
+
       setIsSuccess(true);
       setResult("Message sent successfully!");
       setInput({ name: "", email: "", message: "" });
       setTimeout(() => { setResult(""); setIsSuccess(false); }, 5000);
-    } else {
+    } catch {
       setIsSuccess(false);
-      setResult("Something went wrong. Please try again.");
+      setResult("Unable to send your message right now. Please try again or email me directly.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -85,7 +110,7 @@ const ContactForm = () => {
             </label>
             <input
               className="bg-white/5 w-full border border-white/10 rounded-2xl focus:border-red-500/50 focus:bg-white/10 ring-0 outline-0 transition-all duration-300 px-5 py-4 text-white placeholder:text-slate-600"
-              type="email" name="email" placeholder="john@example.com" maxLength={100} required
+              type="email" name="email" placeholder="john@example.com" maxLength={254} required
               value={input.email} onChange={(e) => setInput({ ...input, email: e.target.value })}
             />
           </div>
@@ -100,7 +125,7 @@ const ContactForm = () => {
             />
           </div>
           {result && (
-            <p className={`text-sm text-center font-medium ${isSuccess ? "text-green-400" : "text-red-500"}`}>{result}</p>
+            <p role="status" aria-live="polite" className={`text-sm text-center font-medium ${isSuccess ? "text-green-400" : "text-red-500"}`}>{result}</p>
           )}
           <button type="submit" disabled={isLoading}
             className="relative group/btn overflow-hidden rounded-2xl bg-gradient-to-r from-red-600 to-red-900 p-[1px] transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50">
@@ -156,8 +181,17 @@ function ContactSection() {
                 </h3>
                 <div className="flex flex-col gap-4">
                   <ContactInfoCard href={`mailto:${personalData.email}`} icon={MdAlternateEmail} label="Email" value={personalData.email} color="#ef4444" />
-                  <ContactInfoCard href={`tel:${personalData.phone}`} icon={IoMdCall} label="Phone" value={personalData.phone} color="#dc2626" />
-                  <ContactInfoCard href="#" icon={MapPin} label="Location" value={personalData.address} color="#991b1b" />
+                  {personalData.phones?.map((phone) => (
+                    <ContactInfoCard
+                      key={phone.country}
+                      href={phone.href}
+                      icon={IoMdCall}
+                      label={`${phone.flag} ${phone.country}`}
+                      value={phone.value}
+                      color="#dc2626"
+                    />
+                  ))}
+                  <ContactInfoCard icon={MapPin} label="Location" value={personalData.address} color="#991b1b" />
                 </div>
               </div>
             </SectionReveal>

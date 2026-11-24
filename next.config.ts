@@ -13,6 +13,7 @@ const nextConfigFunction = async (phase: string) => {
     const withPWA = (await import("@ducanh2912/next-pwa")).default({
       dest: "public",
       register: true,
+      disable: phase === PHASE_DEVELOPMENT_SERVER,
     });
     return withPWA(nextConfig);
   }

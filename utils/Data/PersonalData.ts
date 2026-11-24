@@ -15,8 +15,21 @@ export const personalData = {
   ],
   description:
     "I'm Aman Karn, a Computer Science student (Batch of 2024–2028) at Sri Eshwar College of Engineering, with a clear vision to become a proficient Full Stack Developer. My journey began with a curiosity for how websites are built, which quickly grew into a passion for crafting clean, functional, and aesthetically pleasing web interfaces. Passion flows through every line of code I write — brewing innovation one cup, one commit at a time.",
-  email: "officala93@gmail.com",
-  phone: "+917204840692",
+  email: "amankarnakarna152@gmail.com",
+  phones: [
+    {
+      country: "India",
+      flag: "🇮🇳",
+      value: "+91 7204840692",
+      href: "tel:+917204840692",
+    },
+    {
+      country: "Nepal",
+      flag: "🇳🇵",
+      value: "+977 9806826731",
+      href: "tel:+9779806826731",
+    },
+  ],
   address: "Coimbatore, India",
   github: "https://github.com/Aman530680",
   facebook: "",

@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import DevServiceWorkerCleanup from "./components/DevServiceWorkerCleanup";
 import ScrollToTopButton from "@/../utils/ScrollToTopButton";
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -74,6 +75,7 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <Navbar />
+        <DevServiceWorkerCleanup />
         <main className="text-white">
           <div className="container">{children}</div>
         </main>

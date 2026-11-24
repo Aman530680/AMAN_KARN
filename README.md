@@ -65,11 +65,13 @@ npm install
 
 ### 3. Set up environment variables
 
-Copy `.env.example` and create `.env.local`:
+Copy `.env.example` to `.env.local` and add your Web3Forms access key:
 
 ```env
-NEXT_PUBLIC_WEB3FORMS_KEY=your_web3forms_key
+NEXT_PUBLIC_WEB3FORMS_KEY=your_web3forms_access_key
 ```
+
+The contact form submits directly to Web3Forms using its client-side access key. Web3Forms access keys are included in browser requests; restrict the key to your website domain in the Web3Forms dashboard.
 
 ### 4. Run the development server
 
@@ -97,6 +99,6 @@ This project is open-source and available under the [MIT License](LICENSE).
 
 Got a project in mind or just want to say hi?
 
-📧 [officala93@gmail.com](mailto:officala93@gmail.com)
+📧 [amankarnakarna152@gmail.com](mailto:amankarnakarna152@gmail.com)
 🔗 [LinkedIn](https://www.linkedin.com/in/aman-karn-569040345/)
 💻 [GitHub](https://github.com/Aman530680)

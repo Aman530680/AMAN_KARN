@@ -66,12 +66,15 @@ const Footer = () => (
               >
                 {personalData.email}
               </a>
-              <a
-                href={`tel:${personalData.phone}`}
-                className="text-gray-400 hover:text-red-500 transition-all font-medium"
-              >
-                {personalData.phone}
-              </a>
+              {personalData.phones?.map((phone) => (
+                <a
+                  key={phone.country}
+                  href={phone.href}
+                  className="text-gray-400 hover:text-red-500 transition-all font-medium"
+                >
+                  {phone.flag} {phone.value} ({phone.country})
+                </a>
+              ))}
             </div>
           </div>
 

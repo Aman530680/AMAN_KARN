@@ -17,6 +17,10 @@ import {
   SiCanva,
   SiAdobeillustrator,
   SiAdobephotoshop,
+  SiAmazon,
+  SiNumpy,
+  SiPandas,
+  SiTensorflow,
   SiFreelancer,
 } from "react-icons/si";
 import { IconType } from "react-icons";
@@ -54,6 +58,16 @@ export const getSkillIcon = (skill: string): IconType => {
       return SiMongodb;
     case "mysql":
       return SiMysql;
+    case "numpy":
+      return SiNumpy;
+    case "pandas":
+      return SiPandas;
+    case "tensorflow":
+    case "machine learning":
+    case "data visualization":
+      return SiTensorflow;
+    case "aws":
+      return SiAmazon;
     case "firebase":
       return SiFirebase;
     case "git":

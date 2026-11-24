@@ -243,7 +243,7 @@ const HeroSection = () => {
                     <span className="text-slate-600 italic">03</span>
                     <p className="ml-4">
                       <span className="text-slate-200">focus:</span>{" "}
-                      <span className="text-red-300">'Fullstack Mastery'</span>,
+                      <span className="text-red-300">'Fullstack & Data Science'</span>,
                     </p>
                   </div>
                   <div className="flex gap-4">
@@ -251,7 +251,7 @@ const HeroSection = () => {
                     <p className="ml-4">
                       <span className="text-slate-200">skills:</span> [
                       <span className="text-red-300">
-                        'React', 'Node.js', 'Java'
+                        'React', 'Node.js', 'Python', 'NumPy', 'Pandas'
                       </span>
                       ],
                     </p>

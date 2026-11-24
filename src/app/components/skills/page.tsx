@@ -62,6 +62,9 @@ function Skills() {
                   Tech Stack
                 </span>
               </h2>
+              <p className="max-w-2xl text-center text-sm leading-relaxed text-slate-400 md:text-base">
+                Full Stack Development, Data Science &amp; AI, and Cloud technologies.
+              </p>
             </div>
           </SectionReveal>
         </div>
