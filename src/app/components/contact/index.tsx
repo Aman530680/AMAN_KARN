@@ -61,6 +61,9 @@ const ContactForm = () => {
     formData.set("email", input.email.trim());
     formData.set("message", input.message.trim());
     formData.set("access_key", accessKey);
+    formData.set("subject", `✨ Portfolio Contact: ${input.name.trim()} wants to connect with you`);
+    formData.set("from_name", "Portfolio Contact");
+    formData.set("replyto", input.email.trim());
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
